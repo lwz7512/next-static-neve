@@ -1,22 +1,36 @@
 /**
- * Home page
- * 
- * @2021/03/18
+ * General template for pages other than index
+ * @2012/03/20
  */
+import ErrorPage from 'next/error'
 import Head from 'next/head'
+
 import {
   initNodeModules,
-  getGeneralSettings, getHomeContent, 
+  getMenuPaths, checkSlugValidity, 
+  getGeneralSettings, getPageContentBy,
 } from '../lib/service'
 
-export default function IndexPage({
-  title, description, siteIconUrl, inlineStyle,
-  header, main, footer,
+
+
+export default function GeneralPage ({
+  slug, 
+  title, 
+  siteIconUrl, 
+  inlineStyle,
+  header,
+  main,
+  footer,
 }) {
+
+  if (!slug) { // not found
+    return <ErrorPage statusCode={404} />
+  }
+
   return (
     <div className="wrapper">
       <Head>
-        <title>{title} – {description}</title>
+        <title>{title} | {slug}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
         <link rel="stylesheet" href="/neve/block-library/style.css"/>
         <link rel="stylesheet" href="/neve/style.css"/>
@@ -43,26 +57,42 @@ export default function IndexPage({
   )
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   const fs = require('fs');
   const got = require('got');
   initNodeModules(fs, got) // cache node js modules
 
-  const {
-    title, description, siteIconUrl,
-  } = await getGeneralSettings()
+  const { slug } = context.params
+  // console.log('>>> requesting page: '+slug)
+  
+  const paths = await getMenuPaths()
+  const exist = checkSlugValidity(slug, paths)
+  const {title, siteIconUrl, } = await getGeneralSettings()
+
+  if(!exist) return {props: {slug : null}}  // 404
+
   const {
     inlineStyle, header, main, footer,
-  } = await getHomeContent()
+  } = await getPageContentBy(slug)
+
   return {
     props: {
-      title,
-      description,
-      siteIconUrl,
-      inlineStyle,
-      header,
-      main,
-      footer,
-    },
+      slug, title, siteIconUrl, inlineStyle, 
+      header, main, footer,
+    }, 
   }
+}
+
+/**
+ * get all the first level page paths for build phase use
+ */
+export async function getStaticPaths() {
+  const paths = await getMenuPaths()
+  // console.log('>>> building paths:')
+  // console.log(paths)
+  return {
+    paths,
+    fallback: true,
+  }
+
 }
