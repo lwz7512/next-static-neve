@@ -8,7 +8,7 @@ class MyDocument extends Document {
 
   render() {
     
-    const bodyClasses = ` page page-template-default wp-custom-logo nv-sidebar-full-width nv-without-title menu_sidebar_slide_left `
+    const bodyClasses = `single page page-template-default wp-custom-logo nv-sidebar-full-width nv-without-title menu_sidebar_slide_left `
 
     return (
       <Html lang="en" >
