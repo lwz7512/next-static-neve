@@ -8,7 +8,8 @@ import Head from 'next/head'
 import {
   initNodeModules, getPostParams, checkIDValidity,
   getGeneralSettings, getPostBy, getPostContentBy,
-} from '../../lib/service'
+} from '@lib/service'
+import WPPage from '@components/wp-page'
 
 
 export default function GeneralPost ({
@@ -24,32 +25,17 @@ export default function GeneralPost ({
   }
 
   return (
-    <div className="wrapper">
-      <Head>
-        <title>{blog} - {title}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
-        <link rel="stylesheet" href="/neve/block-library/style.css"/>
-        <link rel="stylesheet" href="/neve/style.css"/>
-        <link rel="icon" type="image/png" href={icon32} sizes="32x32"/>
-        <link rel="icon" type="image/png" href={icon192} sizes="192x192"/>
-        <link rel="apple-touch-icon" href={iconApple} />
-        <style id="neve-style-inline-css" type="text/css">{inlineStyle}</style>
-      </Head>
-      <header 
-        className="header" role="header" 
-        dangerouslySetInnerHTML={{__html: header}}
-        />
-      <main 
-        id="content" 
-        className="neve-main" role="main"
-        dangerouslySetInnerHTML={{__html: main}}
-        />
-      <footer 
-        id="site-footer" 
-        className="site-footer"
-        dangerouslySetInnerHTML={{__html: footer}}
-        />
-    </div>
+    <WPPage 
+      title={blog}
+      subtile={title}
+      inlineStyle={inlineStyle}
+      icon32={icon32}
+      icon192={icon192}
+      iconApple={iconApple}
+      header={header}
+      main={main}
+      footer={footer}
+    />
   )
 }
 
