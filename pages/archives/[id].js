@@ -15,11 +15,9 @@ export default function GeneralPost ({
   id,
   blog,
   title,
-  siteIconUrl,
   inlineStyle,
-  header,
-  main,
-  footer,
+  icon32, icon192, iconApple,
+  header, main, footer,
 }) {
   if (!id) {
     return <ErrorPage statusCode={404} />
@@ -32,10 +30,10 @@ export default function GeneralPost ({
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
         <link rel="stylesheet" href="/neve/block-library/style.css"/>
         <link rel="stylesheet" href="/neve/style.css"/>
-        <link rel="icon" type="image/png" href={siteIconUrl} sizes="32x32"/>
-        <style id="neve-style-inline-css" type="text/css">
-          {inlineStyle}
-        </style>
+        <link rel="icon" type="image/png" href={icon32} sizes="32x32"/>
+        <link rel="icon" type="image/png" href={icon192} sizes="192x192"/>
+        <link rel="apple-touch-icon" href={iconApple} />
+        <style id="neve-style-inline-css" type="text/css">{inlineStyle}</style>
       </Head>
       <header 
         className="header" role="header" 
@@ -66,15 +64,19 @@ export async function getStaticProps(context) {
   if(!exist) return {props: {id : 0}}  // 404
 
   const { title: blog } = await getPostBy(id)
-  const {title, siteIconUrl, } = await getGeneralSettings()
-  const { inlineStyle, header, main, footer,} = await getPostContentBy(id)
+  const {title, } = await getGeneralSettings()
+  const {
+    inlineStyle, header, main, footer,
+    icon32, icon192, iconApple,
+  } = await getPostContentBy(id)
 
   return {
     props: {
       id,
       blog, // blog title
       title,// site title
-      siteIconUrl, inlineStyle,
+      icon32, icon192, iconApple,
+      inlineStyle,
       header, main, footer,
     }, 
   }

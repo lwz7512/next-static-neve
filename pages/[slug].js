@@ -16,11 +16,9 @@ import {
 export default function GeneralPage ({
   slug, 
   title, 
-  siteIconUrl, 
+  icon32, icon192, iconApple, 
   inlineStyle,
-  header,
-  main,
-  footer,
+  header, main, footer,
 }) {
 
   if (!slug) { // not found
@@ -34,10 +32,10 @@ export default function GeneralPage ({
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
         <link rel="stylesheet" href="/neve/block-library/style.css"/>
         <link rel="stylesheet" href="/neve/style.css"/>
-        <link rel="icon" type="image/png" href={siteIconUrl} sizes="32x32"/>
-        <style id="neve-style-inline-css" type="text/css">
-          {inlineStyle}
-        </style>
+        <link rel="icon" type="image/png" href={icon32} sizes="32x32"/>
+        <link rel="icon" type="image/png" href={icon192} sizes="192x192"/>
+        <link rel="apple-touch-icon" href={iconApple} />
+        <style id="neve-style-inline-css" type="text/css">{inlineStyle}</style>
       </Head>
       <header 
         className="header" role="header" 
@@ -67,13 +65,17 @@ export async function getStaticProps(context) {
   const exist = checkSlugValidity(slug, paths)
   if(!exist) return {props: {slug : null}}  // 404
 
-  const {title, siteIconUrl, } = await getGeneralSettings()
-  const { inlineStyle, header, main, footer,} = await getPageContentBy(slug)
+  const {title, } = await getGeneralSettings()
+  const { 
+    inlineStyle, header, main, footer,
+    icon32, icon192, iconApple,
+  } = await getPageContentBy(slug)
 
   return {
     props: {
-      slug, title, siteIconUrl, inlineStyle, 
-      header, main, footer,
+      slug, title, inlineStyle, 
+      icon32, icon192, iconApple,
+      header, main, footer, 
     }, 
   }
 }

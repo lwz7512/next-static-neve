@@ -10,8 +10,8 @@ import {
 } from '../lib/service'
 
 export default function IndexPage({
-  title, description, siteIconUrl, inlineStyle,
-  header, main, footer,
+  title, description, inlineStyle,
+  header, main, footer, icon32, icon192, iconApple,
 }) {
   return (
     <div className="wrapper">
@@ -20,10 +20,10 @@ export default function IndexPage({
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
         <link rel="stylesheet" href="/neve/block-library/style.css"/>
         <link rel="stylesheet" href="/neve/style.css"/>
-        <link rel="icon" type="image/png" href={siteIconUrl} sizes="32x32"/>
-        <style id="neve-style-inline-css" type="text/css">
-          {inlineStyle}
-        </style>
+        <link rel="icon" type="image/png" href={icon32} sizes="32x32"/>
+        <link rel="icon" type="image/png" href={icon192} sizes="192x192"/>
+        <link rel="apple-touch-icon" href={iconApple} />
+        <style id="neve-style-inline-css" type="text/css">{inlineStyle}</style>
       </Head>
       <header 
         className="header" role="header" 
@@ -49,20 +49,19 @@ export async function getStaticProps() {
   initNodeModules(fs, got) // cache node js modules
 
   const {
-    title, description, siteIconUrl,
+    title, description,
   } = await getGeneralSettings()
   const {
     inlineStyle, header, main, footer,
+    icon32, icon192, iconApple,
   } = await getHomeContent()
+
   return {
     props: {
-      title,
-      description,
-      siteIconUrl,
+      title, description,
+      icon32, icon192, iconApple,
       inlineStyle,
-      header,
-      main,
-      footer,
-    },
+      header, main, footer,
+    }
   }
 }
