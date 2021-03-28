@@ -6,8 +6,8 @@ The fastest way to export your Wordpress(v5.7& Neve theme v2.10.2) site as a sta
 
 ## Demo
 
-- [next site](#)
-- [wp site](#)
+- [next site](https://next-static-neve.vercel.app/)
+- [wp site](https://www.wp4speed.com)
 
 ## Features
 
@@ -18,6 +18,12 @@ The fastest way to export your Wordpress(v5.7& Neve theme v2.10.2) site as a sta
 ## Limitations
 
 - No javascripts included currently
+
+## TODOs
+
+- fix side panel sliding initailly in each page
+- fix mobile screen mode menu button unavailability
+- ...
 
 ## How to use
 
