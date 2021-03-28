@@ -16,7 +16,7 @@ export default function GeneralPost ({
   id,
   blog,
   title,
-  inlineStyle,
+  inlineStyle, layoutCSS,
   icon32, icon192, iconApple,
   header, main, footer,
 }) {
@@ -29,6 +29,7 @@ export default function GeneralPost ({
       title={blog}
       subtile={title}
       inlineStyle={inlineStyle}
+      layoutCSS={layoutCSS}
       icon32={icon32}
       icon192={icon192}
       iconApple={iconApple}
@@ -53,7 +54,7 @@ export async function getStaticProps(context) {
   const {title, } = await getGeneralSettings()
   const {
     inlineStyle, header, main, footer,
-    icon32, icon192, iconApple,
+    icon32, icon192, iconApple, layoutCSS,
   } = await getPostContentBy(id)
 
   return {
@@ -62,7 +63,7 @@ export async function getStaticProps(context) {
       blog, // blog title
       title,// site title
       icon32, icon192, iconApple,
-      inlineStyle,
+      inlineStyle, layoutCSS,
       header, main, footer,
     }, 
   }

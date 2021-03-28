@@ -17,7 +17,7 @@ export default function GeneralPage ({
   slug, 
   title, 
   icon32, icon192, iconApple, 
-  inlineStyle,
+  inlineStyle, layoutCSS,
   header, main, footer,
 }) {
 
@@ -30,6 +30,7 @@ export default function GeneralPage ({
       title={slug}
       subtile={title}
       inlineStyle={inlineStyle}
+      layoutCSS={layoutCSS}
       icon32={icon32}
       icon192={icon192}
       iconApple={iconApple}
@@ -53,12 +54,12 @@ export async function getStaticProps(context) {
   const {title, } = await getGeneralSettings()
   const { 
     inlineStyle, header, main, footer,
-    icon32, icon192, iconApple,
+    icon32, icon192, iconApple, layoutCSS,
   } = await getPageContentBy(slug)
 
   return {
     props: {
-      slug, title, inlineStyle, 
+      slug, title, inlineStyle, layoutCSS,
       icon32, icon192, iconApple,
       header, main, footer, 
     }, 

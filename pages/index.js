@@ -10,7 +10,7 @@ import {
 import WPPage from '@components/wp-page'
 
 export default function IndexPage({
-  title, description, inlineStyle,
+  title, description, inlineStyle, layoutCSS,
   icon32, icon192, iconApple,
   header, main, footer, 
 }) {
@@ -19,6 +19,7 @@ export default function IndexPage({
       title={title}
       subtile={description}
       inlineStyle={inlineStyle}
+      layoutCSS={layoutCSS}
       icon32={icon32}
       icon192={icon192}
       iconApple={iconApple}
@@ -39,14 +40,14 @@ export async function getStaticProps() {
   } = await getGeneralSettings()
   const {
     inlineStyle, header, main, footer,
-    icon32, icon192, iconApple,
+    icon32, icon192, iconApple, layoutCSS, 
   } = await getHomeContent()
 
   return {
     props: {
       title, description,
       icon32, icon192, iconApple,
-      inlineStyle,
+      inlineStyle, layoutCSS,
       header, main, footer,
     }
   }
