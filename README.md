@@ -21,8 +21,8 @@ The fastest way to export your Wordpress(v5.7& Neve theme v2.10.2) site as a sta
 
 ## TODOs
 
-- fix side panel sliding initailly in each page
-- fix mobile screen mode menu button unavailability
+- add more js
+- more test
 - ...
 
 ## How to use
