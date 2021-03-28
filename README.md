@@ -17,7 +17,7 @@ The fastest way to export your Wordpress(v5.7& Neve theme v2.10.2) site as a sta
 
 ## Limitations
 
-- No javascripts included currently
+- few javascripts included currently
 
 ## TODOs
 

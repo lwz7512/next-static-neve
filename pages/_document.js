@@ -12,7 +12,11 @@ class MyDocument extends Document {
 
     return (
       <Html lang="en" >
-        <Head/>
+        <Head>
+          <script type="text/javascript" src="/wp-js/jquery/jquery.min.js?ver=3.5.1"></script>
+          <script type="text/javascript" src="/neve/js/global.js"></script>
+          <script type="text/javascript" src="/neve/js/frontend.js?ver=2.10.2"></script>
+        </Head>
         <body 
           className={bodyClasses}
           style={{height: '100vh'}}>
